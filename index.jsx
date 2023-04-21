@@ -1,23 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { BrowserRouter, Routes, Route, Link } from "react-router-dom"
+import { RouterProvider,createRoutesFromElements,createBrowserRouter, Route, Link } from "react-router-dom"
 import Home from "./pages/Home"
 import About from "./pages/About"
+import Layout from './components/Layout';
+
+const router = createBrowserRouter(createRoutesFromElements(
+  <Route path='/' element={<Layout />}>
+    <Route index element={<Home />} />
+    <Route path="about" element={<About />} />
+  </Route>
+))
 
 function App() {
   return (
-    <BrowserRouter>
-      <header>
-        <Link className="site-logo" to="/">#VanLife</Link>
-        <nav>
-          <Link to="/about">About</Link>
-        </nav>
-      </header>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
-      </Routes>
-    </BrowserRouter>
+    <RouterProvider router = {router} />
   )
 }
 
